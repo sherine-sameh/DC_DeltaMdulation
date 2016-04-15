@@ -40,7 +40,7 @@ legend('Error')
 
 figure
 
-InputDC= ones(Fs);
+InputDC= ones(size(t));
 subplot(2,1,1);
 plot(InputDC,'green')
 hold on
@@ -64,10 +64,10 @@ plot(DemodDC,'blue')
 
 legend('Original Signal','Modulated Signal','Demodulated Signal')
 
-% DCError = (InputDC - DemodDC)^2;
-% figure
-% plot(DCError)
-%legend('Error')
+DCError = (InputDC - DemodDC).^2;
+subplot(2,1,2);
+plot(DCError)
+legend('Error')
 
 figure
 
