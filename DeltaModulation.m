@@ -1,10 +1,9 @@
 clear all;
 
-Fs = 100; %sampling frequency
+Fs = 500; %sampling frequency
 Ts = 1/Fs; %sampling time
 delta=2*pi*Ts; 
 t=0:Ts:1; %signal duration
-
 %filter parameters
 b =1;
 a =1;
