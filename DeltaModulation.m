@@ -1,13 +1,17 @@
 clear all
 clc
 Fm =500;
-Fs = 500;
+Fs = 100;
 Ts = 1/Fs;
+
+b =1;
+a =1;
 
 t=0:Ts:1;
 
 InputSin=sin(2*pi*t);
-plot(InputSin,'Red')
+subplot(2,1,1);
+plot(InputSin,'green')
 hold on
 delta=2*pi*Ts;
 for n=1:length(InputSin)
@@ -22,20 +26,23 @@ for n=1:length(InputSin)
     end
 
 end
-stairs(mqSin)
+stairs(mqSin,'red')
 
-b =1;
-a =1;
 DemodSin=filter (b,a,mqSin);
-figure
-plot(DemodSin)
-SinError = (InputSin  - DemodSin).^2
-figure
-plot(SinError)
+hold on
+plot(DemodSin,'blue')
+legend('Original Signal','Modulated Signal','Demodulated Signal')
 
-InputDC= ones(500);
+SinError = (InputSin  - DemodSin).^2;
+subplot(2,1,2);
+plot(SinError)
+legend('Error')
+
 figure
-plot(InputDC,'Red')
+
+InputDC= ones(Fs);
+subplot(2,1,1);
+plot(InputDC,'green')
 hold on
 for n=1:length(InputDC)
     if n==1
@@ -49,15 +56,24 @@ for n=1:length(InputDC)
     end
 
 end
-stairs(mqDC)
+stairs(mqDC,'red')
 
 DemodDC=filter (b,a,mqDC);
+hold on
+plot(DemodDC,'blue')
+
+legend('Original Signal','Modulated Signal','Demodulated Signal')
+
+% DCError = (InputDC - DemodDC)^2;
+% figure
+% plot(DCError)
+%legend('Error')
+
 figure
-plot(DemodDC)
 
 InputSquare= rectpuls(t);
-figure
-plot(InputSquare,'Red')
+subplot(2,1,1);
+plot(InputSquare,'green')
 hold on
 for n=1:length(InputSquare)
     if n==1
@@ -71,8 +87,14 @@ for n=1:length(InputSquare)
     end
 
 end
-stairs(mqRect)
+stairs(mqRect,'red')
 
-DemodRect=filter (b,a,mqRect);
-figure
-plot(DemodRect)
+DemodSquare=filter (b,a,mqRect);
+hold on
+plot(DemodSquare,'blue')
+legend('Original Signal','Modulated Signal','Demodulated Signal')
+
+SquareError = (InputSquare  - DemodSquare).^2;
+subplot(2,1,2);
+plot(SquareError)
+legend('Error')
