@@ -31,7 +31,7 @@ figure
 plot(DemodSin)
 
 
-InputDC= ones(50);
+InputDC= ones(500);
 figure
 plot(InputDC,'Red')
 hold on
