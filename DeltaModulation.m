@@ -24,6 +24,12 @@ for n=1:length(InputSin)
 end
 stairs(mqSin)
 
+b = 1;
+a = 1;
+TT=filter (b,a,mqSin);
+figure
+plot(TT)
+
 
 InputDC= ones(50);
 figure
