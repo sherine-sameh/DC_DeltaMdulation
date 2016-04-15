@@ -27,6 +27,9 @@ subplot(2,1,2);
 plot(SinError) %plotting the error 
 legend('Error')
 
+figure
+plot(Output)
+
 %DC voltage signal
 figure
 InputDC= ones(size(t));
@@ -65,6 +68,9 @@ SquareError = (InputSquare  - DemodSquare).^2;
 subplot(2,1,2);
 plot(SquareError)
 legend('Error')
+
+figure
+plot(Output)
 
 %changing Ts - newTs = 0.1*oldTs
 NewTs = 0.1*1/Fs;
@@ -108,6 +114,7 @@ subplot(2,1,2);
 plot(DCError1)
 legend('Error')
 
+
 figure
 
 InputSquare1= rectpuls(t1);
@@ -126,6 +133,9 @@ SquareError1 = (InputSquare1  - DemodSquare1).^2;
 subplot(2,1,2);
 plot(SquareError1)
 legend('Error')
+
+figure
+plot(Output)
 
 %changing delta - newDelta = 0.1* oldDelta
 delta1=0.1*delta;
@@ -148,6 +158,9 @@ plot(SinError2)
 legend('Error')
 
 figure
+plot(Output)
+
+figure
 
 InputDC2= ones(size(t));
 subplot(2,1,1);
@@ -168,6 +181,9 @@ plot(DCError2)
 legend('Error')
 
 figure
+plot(Output)
+
+figure
 
 InputSquare2= rectpuls(t);
 subplot(2,1,1);
@@ -185,3 +201,6 @@ SquareError2 = (InputSquare2  - DemodSquare2).^2;
 subplot(2,1,2);
 plot(SquareError2)
 legend('Error')
+
+figure
+plot(Output)
