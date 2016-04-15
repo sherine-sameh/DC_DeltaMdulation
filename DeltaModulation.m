@@ -29,7 +29,9 @@ a =1;
 DemodSin=filter (b,a,mqSin);
 figure
 plot(DemodSin)
-
+SinError = (InputSin  - DemodSin).^2
+figure
+plot(SinError)
 
 InputDC= ones(500);
 figure
