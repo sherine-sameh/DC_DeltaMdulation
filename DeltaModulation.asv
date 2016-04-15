@@ -1,7 +1,7 @@
 clear all
 clc
 Fm =500;
-Fs = 500;
+Fs = 100;
 Ts = 1/Fs;
 
 t=0:Ts:1;
@@ -51,7 +51,7 @@ stairs(mqDC)
 
 DemodDC=filter (b,a,mqDC);
 figure
-plot(DemodDC)
+plot(DemodS)
 
 InputSquare= rectpuls(t);
 figure
@@ -70,7 +70,3 @@ for n=1:length(InputSquare)
 
 end
 stairs(mqRect)
-
-DemodRect=filter (b,a,mqRect);
-figure
-plot(DemodRect)
