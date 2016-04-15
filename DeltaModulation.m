@@ -1,6 +1,6 @@
 clear all;
 
-Fs = 500; %sampling frequency
+Fs = 100; %sampling frequency
 Ts = 1/Fs; %sampling time
 delta=2*pi*Ts; 
 t=0:Ts:1; %signal duration
@@ -8,9 +8,8 @@ t=0:Ts:1; %signal duration
 b =1;
 a =1;
 
-%Sin wave
 InputSin=sin(2*pi*t); % generate sin input signal
-subplot(2,1,1);
+subplot(3,1,1);
 plot(InputSin,'green') %ploting original signal
 hold on
 mqSin = modulation(InputSin,delta); %construct modulate signal using modultion function
@@ -22,17 +21,18 @@ plot(DemodSin,'blue') %ploting the demodulated signal
 legend('Original Signal','Modulated Signal','Demodulated Signal')
 
 SinError = (InputSin  - DemodSin).^2; %calculate the error between the original signal and the reconstructed signal  
-subplot(2,1,2);
+subplot(3,1,2);
 plot(SinError) %plotting the error 
 legend('Error')
 
-figure
-plot(Output)
+Output1 = opsignal(InputSin,delta); %output modulated signal 
+subplot(3,1,3)
+plot(Output1)
 
 %DC voltage signal
 figure
 InputDC= ones(size(t));
-subplot(2,1,1);
+subplot(3,1,1);
 plot(InputDC,'green')
 hold on
 mqDC = modulation(InputDC,delta);
@@ -41,18 +41,21 @@ stairs(mqDC,'red')
 DemodDC=filter (b,a,mqDC);
 hold on
 plot(DemodDC,'blue')
-
 legend('Original Signal','Modulated Signal','Demodulated Signal')
 
 DCError = (InputDC - DemodDC).^2;
-subplot(2,1,2);
+subplot(3,1,2);
 plot(DCError)
 legend('Error')
+
+Output2 = opsignal(InputDC,delta);
+subplot(3,1,3)
+plot(Output2)
 
 %Square wave signal
 figure
 InputSquare= rectpuls(t);
-subplot(2,1,1);
+subplot(3,1,1);
 plot(InputSquare,'green')
 hold on
 mqRect = modulation(InputSquare,delta);
@@ -64,14 +67,17 @@ plot(DemodSquare,'blue')
 legend('Original Signal','Modulated Signal','Demodulated Signal')
 
 SquareError = (InputSquare  - DemodSquare).^2;
-subplot(2,1,2);
+subplot(3,1,2);
 plot(SquareError)
 legend('Error')
 
-figure
-plot(Output)
+Output3 = opsignal(InputSquare,delta);
+subplot(3,1,3)
+plot(Output3)
 
 %changing Ts - newTs = 0.1*oldTs
+%the granular noise will be bigger in the modulated signal
+
 NewTs = 0.1*1/Fs;
 t1=0:NewTs:1;
 
@@ -113,7 +119,6 @@ subplot(2,1,2);
 plot(DCError1)
 legend('Error')
 
-
 figure
 
 InputSquare1= rectpuls(t1);
@@ -133,10 +138,9 @@ subplot(2,1,2);
 plot(SquareError1)
 legend('Error')
 
-figure
-plot(Output)
-
 %changing delta - newDelta = 0.1* oldDelta
+%the granular noise will be bigger also as the delta depend on Ts
+
 delta1=0.1*delta;
 InputSin2=sin(2*pi*t);
 figure
@@ -157,9 +161,6 @@ plot(SinError2)
 legend('Error')
 
 figure
-plot(Output)
-
-figure
 
 InputDC2= ones(size(t));
 subplot(2,1,1);
@@ -178,10 +179,6 @@ DCError2 = (InputDC2 - DemodDC2).^2;
 subplot(2,1,2);
 plot(DCError2)
 legend('Error')
-
-figure
-plot(Output)
-
 figure
 
 InputSquare2= rectpuls(t);
@@ -200,6 +197,3 @@ SquareError2 = (InputSquare2  - DemodSquare2).^2;
 subplot(2,1,2);
 plot(SquareError2)
 legend('Error')
-
-figure
-plot(Output)

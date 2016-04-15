@@ -1,5 +1,5 @@
-function [mq]=modulation(Input,delta)
-for n=1:length(Input)
+function [Output] = opsignal(Input,delta)
+    for n=1:length(Input)
     if n==1
         e(n) = Input(n);
         eq(n) = delta*sign(n);
@@ -8,7 +8,13 @@ for n=1:length(Input)
         e(n) = Input(n)-mq(n-1);
         eq(n) = delta*sign(e(n));
         mq(n) = mq(n-1)+eq(n);
+        
+        if mq(n)> mq(n-1)
+           Output(n) = 1;
+        else
+           Output(n) = 0;
+        end
     end
+    end
+end
 
-end
-end
