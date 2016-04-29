@@ -1,3 +1,4 @@
+
 function [q, r] = Schmidt(A)
          [m, n] = size(A);
          q = zeros(m, n);
@@ -14,3 +15,4 @@ function [q, r] = Schmidt(A)
             end
         end
 end
+
